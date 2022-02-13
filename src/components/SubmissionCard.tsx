@@ -2,8 +2,13 @@ import React from "react";
 import Card from "./Card";
 import { Text, Title } from "./Typography";
 import DetailSubmissionCard from "./DetailSubmissionCard";
+import { LogPembelajaranFinal } from "../utils/services/response/SubmissionsResponse";
 
-export default function SubmissionCard({ submission }) {
+export default function SubmissionCard({
+  submission,
+}: {
+  submission: LogPembelajaranFinal;
+}) {
   const [showDetail, setShowDetail] = React.useState(false);
   return (
     <div style={{ marginBottom: "20px" }}>
@@ -43,10 +48,7 @@ export default function SubmissionCard({ submission }) {
           </div>
           <div
             onClick={() => setShowDetail(!showDetail)}
-            style={{
-              transform: showDetail && "rotate(180deg)",
-              cursor: "pointer",
-            }}
+            className={"pointer " + (showDetail && "button-rotate")}
           >
             <img
               src="/images/icon-down.svg"

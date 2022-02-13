@@ -1,5 +1,5 @@
 import React from "react";
-import Shimmer from "react-js-loading-shimmer";
+import { Shimmer } from "react-shimmer";
 import Card from "./Card";
 
 export default function MateriShimmer() {
@@ -11,8 +11,8 @@ export default function MateriShimmer() {
             width: "100%",
           }}
         >
-          <Shimmer height={"30px"} /> <br />
-          <Shimmer height={"30px"} />
+          <Shimmer height={16} width={100} /> <br />
+          <Shimmer height={14} width={500} />
         </div>
       </Card>
     </div>

@@ -1,4 +1,10 @@
-export function Text({ color = "#202020", children }) {
+export function Text({
+  color = "#202020",
+  children,
+}: {
+  color?: string;
+  children: JSX.Element | string;
+}) {
   return (
     <p
       className="text"
@@ -10,7 +16,13 @@ export function Text({ color = "#202020", children }) {
     </p>
   );
 }
-export function Title({ color = "#202020", children }) {
+export function Title({
+  color = "#202020",
+  children,
+}: {
+  color?: string;
+  children: JSX.Element | string;
+}) {
   return (
     <div
       className="title"
@@ -23,7 +35,13 @@ export function Title({ color = "#202020", children }) {
   );
 }
 
-export function Heading3({ color = "#202020", children }) {
+export function Heading3({
+  color = "#202020",
+  children,
+}: {
+  color?: string;
+  children: JSX.Element | string;
+}) {
   return (
     <div
       className="heading-3"
@@ -36,7 +54,13 @@ export function Heading3({ color = "#202020", children }) {
   );
 }
 
-export function Heading2({ color = "#202020", children }) {
+export function Heading2({
+  color = "#202020",
+  children,
+}: {
+  color?: string;
+  children: JSX.Element | string;
+}) {
   return (
     <div
       className="heading-2"
@@ -48,7 +72,13 @@ export function Heading2({ color = "#202020", children }) {
     </div>
   );
 }
-export function Heading1({ color = "#202020", children }) {
+export function Heading1({
+  color = "#202020",
+  children,
+}: {
+  color?: string;
+  children: JSX.Element | string;
+}) {
   return (
     <div
       className="heading-1"

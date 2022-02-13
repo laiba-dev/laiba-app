@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import apiClient from "../../utils/services/apiClient";
 import { useQuery } from "../../utils/useQuery";
 import { AuthResponse } from "../../utils/services/response/AuthResponse";
@@ -25,7 +25,7 @@ export default function AuthCallback() {
           navigate("/");
         });
     });
-  }, []);
+  }, [dispatch, query, navigate]);
 
   return <div></div>;
 }

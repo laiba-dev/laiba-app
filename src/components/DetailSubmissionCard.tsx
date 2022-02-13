@@ -20,9 +20,9 @@ export default function DetailSubmissionCard({
           <div className="detail-grid">
             <div className="submission-time">
               <Text color={color.text}>Waktu Mulai Mengerjakan</Text>
-              <Text>{submission.tanggal_mulai}</Text>
+              <Text>{submission.tanggal_mulai.toString()}</Text>
               <Text color={color.text}>Waktu Pengumpulan</Text>
-              <Text>{submission.created_at}</Text>
+              <Text>{submission.created_at.toString()}</Text>
               <Text color={color.text}>Waktu Pengerjaan</Text>
               <Text>1 Hari 20 Menit</Text>
             </div>

@@ -1,7 +1,7 @@
 import React from "react";
 import { shadow } from "./Color";
 
-export default function Card({ children }: { children: JSX.Element  }) {
+export default function Card({ children }: { children: JSX.Element }) {
   return (
     <div
       style={{

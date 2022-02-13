@@ -5,6 +5,7 @@ import { color } from "../Color";
 import DropdownContent from "../DropdownContent";
 import { useDispatch } from "react-redux";
 import { logoutAction } from "../../utils/redux/actions/AuthActions";
+import { useNavigate } from "react-router-dom";
 
 export default function Header({
   setCollapsed,
@@ -14,9 +15,11 @@ export default function Header({
   name: string;
 }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   function logout() {
     dispatch(logoutAction());
+    navigate("/login");
   }
 
   return (
@@ -35,7 +38,7 @@ export default function Header({
       {name ? (
         <div className="dropdown">
           <div style={{ padding: "20px", cursor: "pointer" }}>
-            <Text color={color.text}>Hai, {name}</Text>
+            <Text color={color.text}>{"Hai, " + name}</Text>
           </div>
           <DropdownContent>
             <DropdownItem text={"Logout"} action={logout} />

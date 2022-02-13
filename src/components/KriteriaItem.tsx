@@ -1,7 +1,8 @@
 import React from "react";
+import { LogTest } from "../utils/services/response/SubmissionsResponse";
 import { Text } from "./Typography";
 
-export default function KriteriaItem({ kriteria }) {
+export default function KriteriaItem({ kriteria }: { kriteria: LogTest }) {
   return (
     <div className="kriteria-item">
       <img

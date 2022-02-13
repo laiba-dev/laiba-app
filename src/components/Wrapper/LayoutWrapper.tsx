@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import routes, { RouteItem } from "../../utils/routes";
 import { color } from "../Color";
+import PrivateRoute from "../PrivateRoute";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 
@@ -9,9 +10,21 @@ export default function LayoutWrapper() {
   const [collapsed, setCollapsed] = useState(false);
 
   function renderRoutes() {
-    return routes.map((item: RouteItem) => (
-      <Route path={item.route} element={<item.component />} key={item.nama} />
-    ));
+    return routes.map((item: RouteItem) => {
+      return item.protected ? (
+        <Route
+          path={item.route}
+          element={
+            <PrivateRoute>
+              <item.component />
+            </PrivateRoute>
+          }
+          key={item.nama}
+        />
+      ) : (
+        <Route path={item.route} element={<item.component />} key={item.nama} />
+      );
+    });
   }
 
   const location = useLocation();

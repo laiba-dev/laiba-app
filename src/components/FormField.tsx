@@ -6,6 +6,12 @@ export default function FormField({
   onChange,
   placeholder,
   disabled = false,
+}: {
+  type: string;
+  value: string;
+  onChange: (event: React.FormEvent<HTMLInputElement>) => void;
+  placeholder: string;
+  disabled?: boolean;
 }) {
   return (
     <input

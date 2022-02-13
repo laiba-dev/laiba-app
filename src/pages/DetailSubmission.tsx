@@ -57,7 +57,7 @@ export default function DetailSubmission() {
         setTestResult(logPembelajaranData);
         setLoading(false);
       });
-  }, [id]);
+  }, [id, auth.api_token]);
 
   return (
     <div>
@@ -75,7 +75,7 @@ export default function DetailSubmission() {
               <Text color={color.text}>Praktikum yang dikerjakan</Text>
               <Text>{testResult.pembelajaran.praktikum.nama_praktikum}</Text>
               <Text color={color.text}>Waktu Pengumpulan</Text>
-              <Text>{testResult.created_at}</Text>
+              <Text>{testResult.created_at.toString()}</Text>
             </div>
           )}
         </Card>
