@@ -1,11 +1,16 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import MenuReducer from "./reducers/MenuReducer";
+import AuthReducers, { authInitialState } from "./reducers/AuthReducer";
+import MenuReducer, { menuInitialState } from "./reducers/MenuReducer";
 
 export const AppStore = configureStore({
   reducer: combineReducers({
     menu: MenuReducer,
+    auth: AuthReducers,
   }),
-  preloadedState: {},
+  preloadedState: {
+    auth: authInitialState,
+    menu: menuInitialState,
+  },
   devTools: true,
 });
 

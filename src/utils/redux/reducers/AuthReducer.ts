@@ -1,35 +1,41 @@
 import { PayloadAction } from "@reduxjs/toolkit";
 import { LOGIN, LOGOUT } from "../constants/AuthConstants";
-import { AuthStateData } from "../constants/AuthState";
+import { AuthResponse } from "../../services/response/AuthResponse";
 
-const initialState: AuthStateData = {
-  id: 0,
-  nama: "",
-  nim: "",
-  prodi: "",
-  username: "",
-  created_at: Date.prototype,
-  email_verified_at: null,
-  updated_at: Date.prototype,
-  apiToken: "",
-  ghAccessToken: "",
+export var authInitialState: AuthResponse = {
+  access_token: "",
+  api_token: "",
+  avatar_url: "",
+  user: {
+    id: 0,
+    nama: "",
+    nim: "",
+    prodi: "",
+    username: "",
+    email_verified_at: null,
+    created_at: Date.prototype,
+    updated_at: Date.prototype,
+  },
 };
 
-const MenuReducer = (
-  state = initialState,
-  action: PayloadAction<AuthStateData>
+var authData = window.localStorage.getItem("authReducers");
+authInitialState = authData ? JSON.parse(authData) : authInitialState;
+
+const AuthReducers = (
+  state = authInitialState,
+  action: PayloadAction<AuthResponse>
 ) => {
   switch (action.type) {
     case LOGIN:
       const authData = action.payload;
-      localStorage.setItem("authReducers", JSON.stringify(authData));
+      window.localStorage.setItem("authReducers", JSON.stringify(authData));
       return authData;
     case LOGOUT:
-      localStorage.removeItem("authReducers");
-      return initialState;
+      window.localStorage.removeItem("authReducers");
+      return authInitialState;
     default:
       return state;
   }
 };
 
-export default MenuReducer;
+export default AuthReducers;

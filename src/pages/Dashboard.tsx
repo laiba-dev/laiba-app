@@ -1,9 +1,12 @@
-import { Heading3, Heading2, Text } from "../components/Typography";
+import { Heading3, Heading2, Text, Title } from "../components/Typography";
 import Card from "../components/Card";
 import { color } from "../components/Color";
 import React from "react";
+import { useSelector } from "react-redux";
+import { AppState } from "../utils/redux/store";
 
 export default function Dashboard() {
+  const auth = useSelector((state: AppState) => state.auth);
   return (
     <div
       style={{
@@ -23,15 +26,15 @@ export default function Dashboard() {
               <div
                 style={{ width: "100px", height: "100px", borderRadius: "50%" }}
               >
-                {/* <img
-              src={session.user.image}
-              alt="Foto Profil"
-              style={{
-                width: "100px",
-                height: "100px",
-                borderRadius: "50%",
-              }}
-            /> */}
+                <img
+                  src={auth.avatar_url}
+                  alt="Foto Profil"
+                  style={{
+                    width: "100px",
+                    height: "100px",
+                    borderRadius: "50%",
+                  }}
+                />
               </div>
               <div
                 style={{
@@ -40,7 +43,7 @@ export default function Dashboard() {
                   marginLeft: "20px",
                 }}
               >
-                {/* <Title>{session.user.name}</Title> */}
+                <Title>{auth.user.nama}</Title>
                 <Text color={color.text}>D-IV Teknik Informatika</Text>
                 <Text color={color.text}>1841720176</Text>
               </div>

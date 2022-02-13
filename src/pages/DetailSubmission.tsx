@@ -8,6 +8,8 @@ import SubmissionService from "../utils/services/SubmissionService";
 import { useParams } from "react-router-dom";
 import { SubmissionsDetailResponse } from "../utils/services/response/SubmissionDetailResponse";
 import MateriShimmer from "../components/MateriShimmer";
+import { useSelector } from "react-redux";
+import { AppState } from "../utils/redux/store";
 
 const testResultInitialState: SubmissionsDetailResponse = {
   pembelajaran: {
@@ -44,10 +46,11 @@ export default function DetailSubmission() {
   const [loading, setLoading] = React.useState(true);
 
   let { id } = useParams();
+  let auth = useSelector((state: AppState) => state.auth);
 
   React.useEffect(() => {
     setLoading(true);
-    SubmissionService("21|qWdKpL3jRqdNts5Sq5uBkMlqxUjnICzCP7ymJDCg")
+    SubmissionService(auth.api_token)
       .getSubmission(id !== undefined ? id : "")
       .then((response) => {
         const logPembelajaranData = response.data.data;

@@ -11,15 +11,19 @@ import {
   LogPembelajaranFinal,
   SubmissionPembelajaran,
 } from "../utils/services/response/SubmissionsResponse";
+import { useSelector } from "react-redux";
+import { AppState } from "../utils/redux/store";
 
 const submissionsInitalState: Array<LogPembelajaranFinal> = [];
 
 export default function Submissions() {
   const [submissions, setSubmissions] = React.useState(submissionsInitalState);
   const [loading, setLoading] = useState(false);
+  let auth = useSelector((state: AppState) => state.auth);
+
   React.useEffect(() => {
     setLoading(true);
-    SubmissionService("21|qWdKpL3jRqdNts5Sq5uBkMlqxUjnICzCP7ymJDCg")
+    SubmissionService(auth.api_token)
       .getListSubmission()
       .then(
         (
@@ -42,7 +46,7 @@ export default function Submissions() {
           setLoading(false);
         }
       );
-  }, []);
+  }, [auth.api_token]);
   return (
     <div>
       <div style={{ marginBottom: "20px" }}>

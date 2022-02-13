@@ -1,8 +1,17 @@
-export interface GithubAuthResponse {
+export interface AuthResponse {
+  api_token: string;
+  user: User;
   access_token: string;
-  expires_in: number;
-  refresh_token: string;
-  refresh_token_expires_in: number;
-  token_type: string;
-  scope: string;
+  avatar_url: string;
+}
+
+export interface User {
+  id: number;
+  nama: string;
+  nim: string;
+  prodi: string;
+  username: string;
+  email_verified_at: null;
+  created_at: Date;
+  updated_at: Date;
 }

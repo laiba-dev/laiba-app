@@ -1,33 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import apiClient from "../../utils/services/apiClient";
 import { useQuery } from "../../utils/useQuery";
-import { GithubAuthResponse } from "../../utils/services/response/AuthResponse";
+import { AuthResponse } from "../../utils/services/response/AuthResponse";
 import { AxiosResponse } from "axios";
 import { useDispatch } from "react-redux";
-import { LOGIN } from "../../utils/redux/constants/AuthConstants";
-import {
-  GITHUB_ID,
-  GITHUB_REDIRECT_URI,
-  GITHUB_SCOPE,
-  GITHUB_SECRET,
-} from "../../utils/constants";
+import { loginAction } from "../../utils/redux/actions/AuthActions";
+import { ApiResponse } from "../../utils/services/response/ApiResponse";
+import { useNavigate } from "react-router-dom";
 
 export default function AuthCallback() {
   let query = useQuery();
-  const [authData, setAuthData] = useState({});
+  let navigate = useNavigate();
+  let dispatch = useDispatch();
 
   useEffect(() => {
     let authState = query.get("state");
     let authCode = query.get("code");
 
-    apiClient
-      .post(
-        `https://github.com/login/oauth/access_token?client_id=${GITHUB_ID}&client_secret=${GITHUB_SECRET}&code=${authCode}&grant_type=authorization_code&redirect_uri=${GITHUB_REDIRECT_URI}&scope=${GITHUB_SCOPE}`
-      )
-      .then((response: AxiosResponse<GithubAuthResponse>) => {
-        setAuthData({ ...authData, accessToken: response.data.access_token });
-        console.log(authData);
-      });
+    apiClient.get("/sanctum/csrf-cookie").then((response: AxiosResponse) => {
+      apiClient
+        .post(`/api/authenticate`, { state: authState, code: authCode })
+        .then((response: AxiosResponse<ApiResponse<AuthResponse>>) => {
+          dispatch(loginAction(response.data.data));
+          navigate("/");
+        });
+    });
   }, []);
 
   return <div></div>;

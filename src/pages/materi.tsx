@@ -11,6 +11,8 @@ import {
 } from "../utils/services/response/MateriResponse";
 import { AxiosResponse } from "axios";
 import { ApiResponse } from "../utils/services/response/ApiResponse";
+import { useSelector } from "react-redux";
+import { AppState } from "../utils/redux/store";
 
 const listMateriInitialState: Array<MateriFinalData> = [];
 
@@ -19,12 +21,14 @@ export default function Materi() {
 
   const [listMateri, setListMateri] = useState(listMateriInitialState);
 
+  const auth = useSelector((state: AppState) => state.auth);
+
   let query = useQuery();
   let pembelajaranId = query.get("pembelajaranId");
 
   useEffect(() => {
     setLoading(true);
-    MateriService("21|qWdKpL3jRqdNts5Sq5uBkMlqxUjnICzCP7ymJDCg")
+    MateriService(auth.api_token)
       .getListMateri(
         pembelajaranId !== null ? Number.parseInt(pembelajaranId) : 0
       )
@@ -56,7 +60,7 @@ export default function Materi() {
         setListMateri(coursesListFinal);
         setLoading(false);
       });
-  }, [pembelajaranId]);
+  }, [pembelajaranId, auth.api_token]);
 
   return (
     <div style={{ display: "flex", flexDirection: "column", rowGap: "20px" }}>

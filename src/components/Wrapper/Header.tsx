@@ -3,6 +3,8 @@ import { Text } from "../Typography";
 import DropdownItem from "./DropdownItem";
 import { color } from "../Color";
 import DropdownContent from "../DropdownContent";
+import { useDispatch } from "react-redux";
+import { logoutAction } from "../../utils/redux/actions/AuthActions";
 
 export default function Header({
   setCollapsed,
@@ -11,7 +13,11 @@ export default function Header({
   setCollapsed: () => void;
   name: string;
 }) {
-  function logout() {}
+  const dispatch = useDispatch();
+
+  function logout() {
+    dispatch(logoutAction());
+  }
 
   return (
     <div className="header">

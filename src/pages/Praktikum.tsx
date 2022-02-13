@@ -15,6 +15,8 @@ import {
 } from "../utils/services/response/PraktikumResponse";
 import { AxiosResponse } from "axios";
 import { ApiResponse } from "../utils/services/response/ApiResponse";
+import { useSelector } from "react-redux";
+import { AppState } from "../utils/redux/store";
 
 const materiInitialState: PraktikumMateri = {
   id: 0,
@@ -35,11 +37,12 @@ export default function DetailMateri() {
   const [kuis, setKuis] = useState(praktikumInitialState);
   const [loading, setLoading] = useState(false);
 
+  let auth = useSelector((state: AppState) => state.auth);
   let { id } = useParams();
 
   useEffect(() => {
     setLoading(true);
-    MateriService("21|qWdKpL3jRqdNts5Sq5uBkMlqxUjnICzCP7ymJDCg")
+    MateriService(auth.api_token)
       .getMateri(id !== undefined ? id : "")
       .then((materiData: AxiosResponse<ApiResponse<Praktikum>>) => {
         //memilih praktikum yang bisa dikerjakan
@@ -82,7 +85,7 @@ export default function DetailMateri() {
         );
         setLoading(false);
       });
-  }, [id]);
+  }, [id, auth.api_token]);
 
   return (
     <div>

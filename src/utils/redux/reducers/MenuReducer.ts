@@ -5,11 +5,14 @@ export type MenuState = {
   selectedMenu: string;
 };
 
-const initialState: MenuState = {
+export const menuInitialState: MenuState = {
   selectedMenu: "Dashboard",
 };
 
-const MenuReducer = (state = initialState, action: PayloadAction<string>) => {
+const MenuReducer = (
+  state = menuInitialState,
+  action: PayloadAction<string>
+) => {
   switch (action.type) {
     case MENU_SET_SELECTED:
       const newSelectedMenu: MenuState = {
