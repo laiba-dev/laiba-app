@@ -23,6 +23,9 @@ export default function AuthCallback() {
         .then((response: AxiosResponse<ApiResponse<AuthResponse>>) => {
           dispatch(loginAction(response.data.data));
           navigate("/");
+        })
+        .catch((error) => {
+          navigate("/register?username=" + error.response.data.data.username);
         });
     });
   }, [dispatch, query, navigate]);

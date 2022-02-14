@@ -38,7 +38,7 @@ export default function Register() {
   useEffect(() => {
     const username = query.get("username");
     setUserData({ ...userData, username: username || "" });
-  }, [userData, query]);
+  }, []);
 
   return (
     <div
