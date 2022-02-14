@@ -50,7 +50,6 @@ export default function LayoutWrapper() {
         }}
       >
         <Header
-          name={"Irfan Rafif"}
           setCollapsed={() => {
             setCollapsed(!collapsed);
           }}
