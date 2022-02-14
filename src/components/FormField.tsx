@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function FormField({
+export function FormField({
   type = "text",
   value,
   onChange,
@@ -22,5 +22,25 @@ export default function FormField({
       onChange={onChange}
       disabled={disabled}
     />
+  );
+}
+
+export function Select({
+  value,
+  data,
+  onChange,
+}: {
+  value: string;
+  data: Array<string>;
+  onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+}) {
+  return (
+    <select value={value} onChange={onChange} className="formField">
+      {data.map((value: string, index: number) => (
+        <option value={value} key={index}>
+          {value}
+        </option>
+      ))}
+    </select>
   );
 }

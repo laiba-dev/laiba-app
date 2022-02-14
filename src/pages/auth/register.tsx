@@ -4,23 +4,25 @@ import Button from "../../components/Button";
 import Card from "../../components/Card";
 import { color } from "../../components/Color";
 import Divider from "../../components/Divider";
-import FormField from "../../components/FormField";
+import { FormField, Select } from "../../components/FormField";
 import { Text, Title } from "../../components/Typography";
 import apiClient from "../../utils/services/apiClient";
 import { useQuery } from "../../utils/useQuery";
 
+const prodi = ["D3 Manajemen Informatika", "D4 Teknik Informatika"];
+
 export default function Register() {
   const query = useQuery();
   const [userData, setUserData] = React.useState({
-    nim: "",
     nama: "",
-    prodi: "",
+    prodi: prodi[0],
     username: "",
   });
 
   const navigate = useNavigate();
 
   const register = () => {
+    console.log(userData);
     apiClient
       .post("/api/register", userData)
       .then((response) => {
@@ -31,7 +33,7 @@ export default function Register() {
         }
       })
       .catch((err) => {
-        alert(err);
+        alert(err.response.data.data);
       });
   };
 
@@ -60,14 +62,6 @@ export default function Register() {
             </Text>
             <Divider />
             <FormField
-              type="number"
-              value={userData.nim}
-              onChange={(event: React.FormEvent<HTMLInputElement>) =>
-                setUserData({ ...userData, nim: event.currentTarget.value })
-              }
-              placeholder="NIM"
-            />
-            <FormField
               type="text"
               value={userData.nama}
               onChange={(event: React.FormEvent<HTMLInputElement>) =>
@@ -75,13 +69,13 @@ export default function Register() {
               }
               placeholder="Nama"
             />
-            <FormField
-              type="text"
+            <Select
+              data={prodi}
               value={userData.prodi}
-              onChange={(event: React.FormEvent<HTMLInputElement>) =>
-                setUserData({ ...userData, prodi: event.currentTarget.value })
-              }
-              placeholder="Program Studi"
+              onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
+                event.preventDefault();
+                setUserData({ ...userData, prodi: event.target.value });
+              }}
             />
             <FormField
               type="text"

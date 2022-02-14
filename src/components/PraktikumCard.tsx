@@ -6,10 +6,11 @@ import { Text, Title } from "./Typography";
 import MateriService from "../utils/services/MateriService";
 import swal from "sweetalert";
 import { PraktikumFinalElement } from "../utils/services/response/PraktikumResponse";
-import { berhasilMulai } from "../utils/constants";
 import { useSelector } from "react-redux";
 import { AppState } from "../utils/redux/store";
 import { AxiosResponse } from "axios";
+import { ApiResponse } from "../utils/services/response/ApiResponse";
+import { MulaiPraktikumResponse } from "../utils/services/response/MulaiPraktikumResponse";
 
 export default function PraktikumCard({
   praktikum,
@@ -37,13 +38,14 @@ export default function PraktikumCard({
           onClick={() => {
             MateriService(auth.api_token)
               .mulaiPraktikum(praktikum.id)
-              .then((response: AxiosResponse<any>) => {
-                swal({
-                  text: berhasilMulai,
-                  title: "Lanjut Belajar",
-                  icon: "success",
-                });
-              })
+              .then(
+                (
+                  response: AxiosResponse<ApiResponse<MulaiPraktikumResponse>>
+                ) => {
+                  window.location.href =
+                    "https://github.com/" + response.data.data.user_repo;
+                }
+              )
               .catch((err) => {
                 console.log(err);
                 swal({
