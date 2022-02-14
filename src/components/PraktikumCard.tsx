@@ -9,6 +9,7 @@ import { PraktikumFinalElement } from "../utils/services/response/PraktikumRespo
 import { berhasilMulai } from "../utils/constants";
 import { useSelector } from "react-redux";
 import { AppState } from "../utils/redux/store";
+import { AxiosResponse } from "axios";
 
 export default function PraktikumCard({
   praktikum,
@@ -34,12 +35,23 @@ export default function PraktikumCard({
         <Button
           text={"Kerjakan"}
           onClick={() => {
-            MateriService(auth.api_token).mulaiPraktikum(praktikum.id);
-            swal({
-              text: berhasilMulai,
-              title: "Lanjut Belajar",
-              icon: "success",
-            });
+            MateriService(auth.api_token)
+              .mulaiPraktikum(praktikum.id)
+              .then((response: AxiosResponse<any>) => {
+                swal({
+                  text: berhasilMulai,
+                  title: "Lanjut Belajar",
+                  icon: "success",
+                });
+              })
+              .catch((err) => {
+                console.log(err);
+                swal({
+                  text: "Gagal memulai pembelajaran",
+                  title: "Gagal memulai pembelajaran",
+                  icon: "error",
+                });
+              });
           }}
         />
       );
