@@ -7,12 +7,16 @@ import MateriService from "../utils/services/MateriService";
 import swal from "sweetalert";
 import { PraktikumFinalElement } from "../utils/services/response/PraktikumResponse";
 import { berhasilMulai } from "../utils/constants";
+import { useSelector } from "react-redux";
+import { AppState } from "../utils/redux/store";
 
 export default function PraktikumCard({
   praktikum,
 }: {
   praktikum: PraktikumFinalElement;
 }) {
+  const auth = useSelector((state: AppState) => state.auth);
+
   const renderButton = () => {
     if (praktikum.tanggal_selesai !== null) {
       return <Button text={"Selesai"} disabled={true} onClick={() => {}} />;
@@ -30,7 +34,7 @@ export default function PraktikumCard({
         <Button
           text={"Kerjakan"}
           onClick={() => {
-            MateriService("").mulaiPraktikum(praktikum.id);
+            MateriService(auth.api_token).mulaiPraktikum(praktikum.id);
             swal({
               text: berhasilMulai,
               title: "Lanjut Belajar",
