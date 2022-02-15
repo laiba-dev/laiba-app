@@ -3,17 +3,12 @@ import Button from "../../components/Button";
 import { Heading1, Text } from "../../components/Typography";
 import { color } from "../../components/Color";
 import { randomString } from "../../utils/RandomHelper";
-import {
-  GITHUB_ID,
-  GITHUB_REDIRECT_URI,
-  GITHUB_SCOPE,
-} from "../../utils/constants";
 
 export default function SignIn() {
   function signInWithGithub() {
     const state = randomString(30);
 
-    window.location.href = `https://github.com/login/oauth/authorize?client_id=${GITHUB_ID}&redirect_uri=${GITHUB_REDIRECT_URI}&scope=${GITHUB_SCOPE}&state=${state}&allow_signup=true`;
+    window.location.href = `https://github.com/login/oauth/authorize?client_id=${process.env.REACT_APP_GITHUB_ID}&redirect_uri=${process.env.REACT_APP_GITHUB_REDIRECT_URI}&scope=${process.env.REACT_APP_GITHUB_SCOPE}&state=${state}&allow_signup=true`;
   }
 
   return (
