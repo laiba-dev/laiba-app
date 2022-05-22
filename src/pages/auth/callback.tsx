@@ -14,6 +14,14 @@ export default function AuthCallback() {
   let dispatch = useDispatch();
 
   useEffect(() => {
+    
+    const errorQuery = query.get('error');
+
+    
+    if(errorQuery !== null) {
+      navigate('/login?error=' + errorQuery);
+    }
+
     let authState = query.get("state");
     let authCode = query.get("code");
 
