@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "./Button";
 import Card from "./Card";
 import { color } from "./Color";
@@ -19,6 +19,8 @@ export default function PraktikumCard({
 }) {
   const auth = useSelector((state: AppState) => state.auth);
 
+  const [isGenerating, setIsGenerating] = useState(false);
+
   const renderButton = () => {
     if (praktikum.tanggal_selesai !== null) {
       return <Button text={"Selesai"} disabled={true} onClick={() => {}} />;
@@ -36,12 +38,14 @@ export default function PraktikumCard({
         <Button
           text={"Kerjakan"}
           onClick={() => {
+            setIsGenerating(true);
             MateriService(auth.api_token)
               .mulaiPraktikum(praktikum.id)
               .then(
                 (
                   response: AxiosResponse<ApiResponse<MulaiPraktikumResponse>>
                 ) => {
+                  setIsGenerating(false);
                   window.location.href =
                     "https://github.com/" + response.data.data.user_repo;
                 }
@@ -55,6 +59,7 @@ export default function PraktikumCard({
                 });
               });
           }}
+          disabled={isGenerating}
         />
       );
     } else {
