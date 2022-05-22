@@ -19,6 +19,7 @@ export default function Button({
       className="button"
       style={disabled ? { backgroundColor: "#e2e2e2" } : undefined}
       onClick={customOnClick}
+      disabled={disabled ?? false}
     >
       {text}
     </button>
