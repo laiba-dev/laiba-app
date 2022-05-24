@@ -11,6 +11,7 @@ import { AppState } from "../utils/redux/store";
 import { AxiosResponse } from "axios";
 import { ApiResponse } from "../utils/services/response/ApiResponse";
 import { MulaiPraktikumResponse } from "../utils/services/response/MulaiPraktikumResponse";
+import ReactMarkdown from "react-markdown";
 
 export default function PraktikumCard({
   praktikum,
@@ -73,21 +74,46 @@ export default function PraktikumCard({
     }
   };
 
+  const [showMarkdown, setshowMarkdown] = useState(false);
+
   return (
     <div style={{ marginBottom: "20px" }}>
       <Card>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-          }}
-        >
-          <div>
-            <Title>{praktikum.nama_praktikum}</Title>
-            <Text color={color.text}>{praktikum.penjelasan}</Text>
+        <div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
+          >
+            <div>
+              <Title>{praktikum.nama_praktikum}</Title>
+              <Text color={color.text}>{praktikum.penjelasan}</Text>
+            </div>
+            {renderButton()}
           </div>
-          {renderButton()}
+          {showMarkdown && (
+            <div
+              style={{
+                border: "1px solid #e2e2e2",
+                padding: "0px 16px",
+                borderRadius: "4px",
+                marginTop: "16px",
+              }}
+            >
+              <ReactMarkdown>{praktikum.petunjuk}</ReactMarkdown>
+            </div>
+          )}
+          <div
+            style={{ marginTop: "16px" }}
+            onClick={() => setshowMarkdown(!showMarkdown)}
+            className={"pointer"}
+          >
+            <Text>
+              {showMarkdown ? "Sembunyikan petunjuk" : "Tampilkan petunjuk"}
+            </Text>
+          </div>
         </div>
       </Card>
     </div>
