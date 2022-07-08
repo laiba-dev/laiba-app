@@ -44,8 +44,8 @@ export default function Dashboard() {
                 }}
               >
                 <Title>{auth.user.nama}</Title>
-                <Text color={color.text}>D-IV Teknik Informatika</Text>
-                <Text color={color.text}>1841720176</Text>
+                <Text color={color.text}>{auth.user.prodi}</Text>
+                <Text color={color.text}>{auth.user.nim}</Text>
               </div>
             </div>
           </Card>
