@@ -45,7 +45,6 @@ export default function Dashboard() {
               >
                 <Title>{auth.user.nama}</Title>
                 <Text color={color.text}>{auth.user.prodi}</Text>
-                <Text color={color.text}>{auth.user.nim}</Text>
               </div>
             </div>
           </Card>
