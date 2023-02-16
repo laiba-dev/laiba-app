@@ -1,4 +1,3 @@
-import React from 'react'
 import Card from '../components/Card'
 import { Heading1, Text } from '../components/Typography'
 
