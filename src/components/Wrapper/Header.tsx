@@ -31,10 +31,10 @@ export default function Header({ setCollapsed }: { setCollapsed: () => void }) {
           />
         )}
       </div>
-      {auth.user.nama ? (
+      {auth.user?.nama ? (
         <div className="dropdown">
           <div style={{ padding: "20px", cursor: "pointer" }}>
-            <Text color={color.text}>{"Hai, " + auth.user.nama}</Text>
+            <Text color={color.text}>{"Hai, " + (auth.user?.nama ?? "")}</Text>
           </div>
           <DropdownContent>
             <DropdownItem text={"Logout"} action={logout} />

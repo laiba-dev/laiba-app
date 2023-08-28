@@ -23,7 +23,7 @@ export default function Submissions() {
 
   React.useEffect(() => {
     setLoading(true);
-    SubmissionService(auth.api_token)
+    SubmissionService(auth.api_token ?? "")
       .getListSubmission()
       .then(
         (

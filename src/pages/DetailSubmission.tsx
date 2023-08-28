@@ -50,7 +50,7 @@ export default function DetailSubmission() {
 
   React.useEffect(() => {
     setLoading(true);
-    SubmissionService(auth.api_token)
+    SubmissionService(auth.api_token ?? "")
       .getSubmission(id !== undefined ? id : "")
       .then((response) => {
         const logPembelajaranData = response.data.data;
