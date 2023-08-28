@@ -18,7 +18,7 @@ export default function Dashboard() {
     >
       <div>
         <div style={{ marginBottom: "20px" }}>
-          <Heading3>{"Selamat Datang, " + auth.user?.nama}</Heading3>
+          <Heading3>{"Selamat Datang, " + auth.user?.nama ?? ""}</Heading3>
         </div>
         <div className="dashboard-stats">
           <Card>
