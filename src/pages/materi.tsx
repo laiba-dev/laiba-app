@@ -62,7 +62,7 @@ export default function Materi() {
                     setLoading(false);
                 }
             );
-    }, [materiUseCase, pembelajaranId]);
+    }, [pembelajaranId]);
 
     return (
         <div
